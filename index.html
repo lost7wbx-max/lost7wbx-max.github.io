@@ -25,6 +25,7 @@
     }
 
     html, body { height: 100%; }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       color: var(--text-1);
@@ -38,9 +39,10 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       letter-spacing: 0.2px;
+      overflow-x: hidden;
     }
 
-    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; width: 100%; }
     header { position: relative; padding: 84px 0 64px; overflow: hidden; }
     header .container { position: relative; }
 
@@ -94,6 +96,10 @@
 
     /* 编辑模式工具条 */
     .editor-toolbar { position: fixed; right: 16px; bottom: 16px; z-index: 9999; display: grid; gap: 8px; }
+    @media (max-width: 560px) {
+      .editor-toolbar { right: 8px; bottom: 8px; gap: 6px; }
+      .editor-toggle, .editor-action { padding: 8px 10px; font-size: 12px; }
+    }
     .editor-toggle, .editor-action { padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(124,255,203,0.5); background: rgba(0,229,255,0.1); color: var(--text-1); font-weight: 700; cursor: pointer; }
     .section-controls { display: none; position: absolute; top: 8px; right: 8px; gap: 6px; }
     .section-controls button { padding: 6px 8px; border-radius: 8px; border: 1px solid rgba(127,90,240,0.5); background: rgba(127,90,240,0.12); color: var(--text-1); cursor: pointer; }
@@ -172,21 +178,53 @@
     @media (max-width: 960px) {
       .col-6 { grid-column: span 12; }
       .col-4 { grid-column: span 12; }
-      .col-3 { grid-column: span 6; }
+      .col-3 { grid-column: span 12; }
       header { padding-top: 88px; }
       .identity-plain { position: static; margin: 0 0 12px; }
       .header-card { margin-top: 8px; }
       .section-title { font-size: 22px; }
       .summary strong { white-space: normal; }
+      .t-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .metrics { flex-wrap: wrap; }
+      .header-contacts { position: static; margin-top: 12px; flex-wrap: wrap; }
+      .flow { flex-direction: column; align-items: flex-start; }
+      .flow .arrow { transform: rotate(90deg); margin: 4px 0; }
+      .cta { flex-direction: column; align-items: stretch; }
+      .cta .actions { flex-wrap: wrap; width: 100%; }
+      .cta .actions .btn { flex: 1; min-width: 120px; text-align: center; }
     }
     @media (max-width: 560px) {
       .container { padding: 0 16px; }
-      .title { font-size: 22px; }
-      .header-card { padding: 22px; margin-top: 6px; }
-      .cta { gap: 10px; }
-      .section-title { font-size: 22px; }
-      .summary strong { font-size: 18px; }
-      .subtitle { font-size: 18px; }
+      .header-name { font-size: 22px; }
+      .header-tagline { font-size: 17px; }
+      .header-card { padding: 20px; margin-top: 6px; }
+      .section-title { font-size: 20px; }
+      .summary strong { font-size: 17px; }
+      .subtitle { font-size: 16px; }
+      .card { padding: 16px; }
+      .card h3 { font-size: 14px; }
+      .card p, .card li { font-size: 13px; }
+      .t-title { font-size: 13px; }
+      .t-meta { font-size: 11px; }
+      .metric { font-size: 11px; padding: 5px 8px; }
+      .flow .step { font-size: 12px; padding: 8px 10px; }
+      .cta { padding: 16px; gap: 8px; }
+      .cta .pill { font-size: 13px; padding: 6px 10px; }
+      .cta .btn { padding: 8px 12px; font-size: 13px; }
+      .link-btn { font-size: 12px; padding: 6px 8px; }
+      section { padding: 20px 0; }
+      .grid { gap: 12px; }
+    }
+    @media (max-width: 400px) {
+      .container { padding: 0 12px; }
+      .header-name { font-size: 20px; line-height: 1.3; }
+      .header-tagline { font-size: 15px; }
+      .summary { font-size: 14px; }
+      .summary strong { font-size: 16px; }
+      .badge { font-size: 11px; padding: 5px 8px; }
+      .card { padding: 14px; }
+      .section-title { font-size: 18px; }
+      .chip { font-size: 12px; padding: 6px 10px; }
     }
   </style>
 </head>
@@ -562,5 +600,8 @@
   </script>
 </body>
 </html>
+
+
+    
 
 
