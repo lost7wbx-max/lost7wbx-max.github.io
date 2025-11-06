@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Isabelle Weng | AI内容与社交陪伴产品负责人</title>
+  <meta name="description" content="AI-Powered Creative Product Leader | 感知趋势，设计系统，让未来落地。">
+  <style>
+    :root {
+      --bg-start: #0b1020;
+      --bg-end: #0f0c29;
+      --neon-1: #7f5af0;
+      --neon-2: #00e5ff;
+      --neon-3: #7cffcb;
+      --text-1: #e6e6f0;
+      --text-2: #c6c6d0;
+      --muted: #8d93a1;
+      --glass: rgba(255,255,255,0.08);
+      --glass-strong: rgba(255,255,255,0.12);
+      --border: rgba(255,255,255,0.18);
+      --shadow: 0 10px 30px rgba(0,0,0,0.45);
+      --radius: 16px;
+      --radius-lg: 22px;
+      --maxw: 1120px;
+    }
+
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      color: var(--text-1);
+      background: 
+                  radial-gradient(1200px 800px at 15% -10%, rgba(127,90,240,0.24), transparent 60%),
+                  radial-gradient(900px 600px at 85% 8%, rgba(0,229,255,0.18), transparent 60%),
+                  radial-gradient(1000px 700px at 70% 80%, rgba(98, 37, 160, 0.20), transparent 60%),
+                  radial-gradient(800px 600px at 12% 82%, rgba(78, 18, 118, 0.16), transparent 60%),
+                  linear-gradient(180deg, #0b1020 0%, #0d0a1f 40%, #0f0c29 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Noto Sans CJK SC", "Microsoft Yahei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      letter-spacing: 0.2px;
+    }
+
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+    header { position: relative; padding: 84px 0 64px; overflow: hidden; }
+    header .container { position: relative; }
+
+    /* 顶部信号点线动效 */
+    .signal-layer { position: absolute; inset: 0; pointer-events: none; }
+    .signal {
+      position: absolute; width: 6px; height: 6px; border-radius: 50%;
+      background: radial-gradient(circle, var(--neon-2), rgba(0,229,255,0.1));
+      box-shadow: 0 0 12px rgba(0,229,255,0.8), 0 0 24px rgba(127,90,240,0.4);
+      animation: float 8s ease-in-out infinite;
+      opacity: 0.85;
+    }
+    .signal.s1 { top: 12%; left: 8%; animation-delay: 0s; }
+    .signal.s2 { top: 18%; left: 24%; animation-delay: 1.2s; }
+    .signal.s3 { top: 8%; left: 42%; animation-delay: 2.4s; }
+    .signal.s4 { top: 14%; right: 18%; animation-delay: 3.6s; }
+    .signal.s5 { top: 22%; right: 6%; animation-delay: 1.8s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(8px) translateX(6px); }
+    }
+    .signal-line {
+      position: absolute; height: 1px; background: linear-gradient(90deg, transparent, rgba(124,255,203,0.6), transparent);
+      filter: blur(0.2px); opacity: 0.6;
+    }
+    .signal-line.l1 { top: 15%; left: 5%; right: 10%; }
+    .signal-line.l2 { top: 20%; left: 20%; right: 15%; }
+
+    /* 玻璃卡片与标题 */
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .header-card { padding: 28px; display: grid; gap: 18px; margin-top: 84px; }
+    .identity-plain { position: static; z-index: 2; max-width: 100%; display: grid; gap: 10px; }
+    .header-name { font-size: 28px; font-weight: 800; letter-spacing: 0.5px; line-height: 1.35; text-shadow: 0 0 16px rgba(127,90,240,0.25), 0 0 10px rgba(0,229,255,0.15); }
+    .header-tagline { font-size: 19px; color: var(--text-1); opacity: 0.92; font-weight: 650; letter-spacing: 0.25px; line-height: 1.5; text-shadow: 0 0 10px rgba(127,90,240,0.18); }
+    .tagline { font-size: 16px; color: var(--text-1); opacity: 0.95; }
+    .summary { font-size: 15px; color: var(--text-2); line-height: 1.8; }
+    .summary strong { display: block; font-size: 20px; font-weight: 850; letter-spacing: 0.35px; background: linear-gradient(90deg, rgba(124,255,203,0.95), rgba(0,229,255,0.9), rgba(127,90,240,0.95)); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 14px rgba(0,229,255,0.18); margin-bottom: 6px; white-space: nowrap; }
+
+    /* 顶部联系入口 */
+    .header-contacts { position: absolute; top: 0px; right: 20px; display: flex; gap: 10px; align-items: center; z-index: 3; }
+    .link-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; border-radius: 999px; border: 1px solid rgba(0,229,255,0.45); background: rgba(0,229,255,0.08); color: var(--text-1); text-decoration: none; font-size: 13px; font-weight: 600; }
+    .link-btn:hover { border-color: rgba(124,255,203,0.6); background: linear-gradient(90deg, rgba(124,255,203,0.12), rgba(0,229,255,0.10)); }
+
+    /* 编辑模式工具条 */
+    .editor-toolbar { position: fixed; right: 16px; bottom: 16px; z-index: 9999; display: grid; gap: 8px; }
+    .editor-toggle, .editor-action { padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(124,255,203,0.5); background: rgba(0,229,255,0.1); color: var(--text-1); font-weight: 700; cursor: pointer; }
+    .section-controls { display: none; position: absolute; top: 8px; right: 8px; gap: 6px; }
+    .section-controls button { padding: 6px 8px; border-radius: 8px; border: 1px solid rgba(127,90,240,0.5); background: rgba(127,90,240,0.12); color: var(--text-1); cursor: pointer; }
+    .editable-active [data-editable="true"] { outline: 1px dashed rgba(124,255,203,0.5); outline-offset: 2px; }
+    .editable-active section .section-controls { display: inline-flex; }
+
+    .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+    .badge {
+      font-size: 12px; color: #0b1020; background: linear-gradient(90deg, var(--neon-3), var(--neon-2));
+      padding: 6px 10px; border-radius: 999px; font-weight: 600;
+    }
+
+    /* 区块标题 */
+    section { padding: 24px 0; }
+    .section-title { font-size: 26px; font-weight: 900; margin: 0 0 16px; letter-spacing: 0.3px; text-shadow: 0 0 20px rgba(127,90,240,0.16), 0 0 14px rgba(0,229,255,0.12); }
+    .section-sub { font-size: 14px; color: var(--muted); margin: 0 0 18px; }
+
+    /* 网格卡片 */
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; align-items: stretch; }
+    .col-12 { grid-column: span 12; }
+    .col-6 { grid-column: span 6; }
+    .col-4 { grid-column: span 4; }
+    .col-3 { grid-column: span 3; }
+
+    .card { padding: 18px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--glass); box-shadow: 0 6px 24px rgba(0,0,0,0.35); }
+    .card:hover { border-color: rgba(124,255,203,0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.45), 0 0 24px rgba(127,90,240,0.12) inset; transition: box-shadow 220ms ease, border-color 220ms ease, transform 220ms ease; transform: translateY(-1px); }
+    .card h3 { margin: 0 0 8px; font-size: 15px; }
+    .card p, .card li { color: var(--text-2); font-size: 14px; line-height: 1.7; }
+    .card .icon { font-size: 18px; margin-right: 8px; }
+    /* 核心亮点：第一行等高 */
+    #s-strengths + .grid > div { display: flex; }
+    #s-strengths + .grid > div > .card { display: flex; flex-direction: column; flex: 1; }
+
+    /* 时间线与流程 */
+    .timeline { position: relative; padding-left: 18px; }
+    .timeline::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, rgba(127,90,240,0.5), rgba(0,229,255,0.5)); border-radius: 2px; }
+    .t-item { position: relative; padding: 6px 0 14px 12px; }
+    .t-item::before { content: ""; position: absolute; left: -4px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle, var(--neon-2), transparent 70%); box-shadow: 0 0 10px rgba(0,229,255,0.7); }
+    .t-title { font-size: 14px; font-weight: 700; margin: 0 0 6px; }
+    .t-meta { font-size: 12px; color: var(--muted); }
+    .t-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+    .metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0; }
+    .metric { font-size: 12px; color: var(--text-1); border: 1px dashed rgba(124,255,203,0.6); border-radius: 999px; padding: 6px 10px; background: rgba(124,255,203,0.06); }
+
+    /* 视觉小部件 */
+    .flow { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .flow .step { padding: 10px 12px; border-radius: 999px; background: rgba(127,90,240,0.12); border: 1px solid rgba(127,90,240,0.4); font-size: 13px; box-shadow: 0 0 12px rgba(127,90,240,0.18) inset; animation: pulse 3.6s ease-in-out infinite; }
+    .flow .arrow { color: var(--muted); font-size: 16px; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 12px rgba(127,90,240,0.18) inset; } 50% { box-shadow: 0 0 20px rgba(0,229,255,0.28) inset; } }
+
+    /* 网格/线网背景的面板 */
+    .mesh { position: relative; }
+    .mesh::before {
+      content: ""; position: absolute; inset: 0; border-radius: var(--radius); pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 24px 24px, 24px 24px; opacity: 0.45; mix-blend-mode: lighten;
+    }
+
+    /* 荣誉横向滚动 */
+    .h-scroll { display: grid; grid-auto-flow: column; grid-auto-columns: max-content; gap: 12px; overflow-x: auto; padding-bottom: 6px; }
+    .h-scroll::-webkit-scrollbar { height: 6px; }
+    .h-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 999px; }
+    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(127,90,240,0.45); background: rgba(127,90,240,0.10); box-shadow: 0 0 12px rgba(127,90,240,0.18) inset; white-space: nowrap; font-size: 14px; }
+
+    /* CTA */
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; padding: 18px; }
+    .cta .pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(0,229,255,0.5); background: linear-gradient(180deg, rgba(0,229,255,0.08), rgba(127,90,240,0.08)); box-shadow: 0 0 18px rgba(127,90,240,0.25) inset; font-size: 14px; }
+    .cta .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: radial-gradient(circle, var(--neon-3), rgba(124,255,203,0.2)); box-shadow: 0 0 10px rgba(124,255,203,0.9); }
+    .cta .actions { display: flex; gap: 10px; }
+    .cta .btn { padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,0.06); color: var(--text-1); text-decoration: none; font-weight: 600; }
+    .cta .btn.primary { border-color: rgba(124,255,203,0.6); background: linear-gradient(90deg, rgba(124,255,203,0.15), rgba(0,229,255,0.12)); }
+
+    footer { padding: 28px 0 56px; color: var(--muted); text-align: center; font-size: 13px; }
+
+    /* 响应式 */
+    @media (max-width: 960px) {
+      .col-6 { grid-column: span 12; }
+      .col-4 { grid-column: span 12; }
+      .col-3 { grid-column: span 6; }
+      header { padding-top: 88px; }
+      .identity-plain { position: static; margin: 0 0 12px; }
+      .header-card { margin-top: 8px; }
+      .section-title { font-size: 22px; }
+      .summary strong { white-space: normal; }
+    }
+    @media (max-width: 560px) {
+      .container { padding: 0 16px; }
+      .title { font-size: 22px; }
+      .header-card { padding: 22px; margin-top: 6px; }
+      .cta { gap: 10px; }
+      .section-title { font-size: 22px; }
+      .summary strong { font-size: 18px; }
+      .subtitle { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="signal-layer cosmos" aria-hidden="true" style="position:fixed; inset:0; pointer-events:none; z-index:0; background-image: radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.25), transparent 60%), radial-gradient(1px 1px at 30% 10%, rgba(255,255,255,0.18), transparent 60%), radial-gradient(1.5px 1.5px at 70% 15%, rgba(255,255,255,0.22), transparent 60%), radial-gradient(1px 1px at 85% 35%, rgba(255,255,255,0.2), transparent 60%), radial-gradient(1px 1px at 45% 75%, rgba(255,255,255,0.2), transparent 60%), radial-gradient(1.2px 1.2px at 15% 80%, rgba(255,255,255,0.2), transparent 60%);"></div>
+  <header aria-label="顶部 Header 与简介">
+    <div class="signal-layer" aria-hidden="true">
+      <div class="signal s1"></div>
+      <div class="signal s2"></div>
+      <div class="signal s3"></div>
+      <div class="signal s4"></div>
+      <div class="signal s5"></div>
+      <div class="signal-line l1"></div>
+      <div class="signal-line l2"></div>
+    </div>
+    <div class="container">
+      <div class="identity-plain" role="banner">
+        <div class="header-name" data-editable="true">Isabelle Weng | AI内容与社交陪伴产品负责人</div>
+        <div class="header-tagline" data-editable="true">感知趋势，设计系统，让未来落地 × 在市场意识到之前，我已开始构建它</div>
+        <div class="header-contacts" aria-label="顶部联系方式">
+          <a class="link-btn" href="mailto:lost7wbx" aria-label="给我发邮件">📧 Email</a>
+          <a class="link-btn" href="https://www.linkedin.com/in/isabelle-weng" target="_blank" rel="noopener" aria-label="访问我的LinkedIn">in LinkedIn</a>
+        </div>
+      </div>
+      <div class="glass header-card" aria-label="简介">
+        <div class="summary" data-editable="true">
+          <strong data-editable="true">AI-Powered Creative Product Leader | Driving Growth for the Next Era of Creation</strong>
+          专注探索「人如何表达与连接」，从全球创作工具到 AI 社交与陪伴产品。<br>
+          通过「洞察 → 验证 → 规模化」的路径，将未来趋势提前落地。<br>
+          结合系统思维与创造性洞察，构建长期竞争力的产品与生态。
+        </div>
+        <div class="badge-row" aria-label="关键词">
+          <span class="badge" data-editable="true">Trend Sensing</span>
+          <span class="badge" data-editable="true">System Design</span>
+          <span class="badge" data-editable="true">AI Social</span>
+          <span class="badge" data-editable="true">Creator Economy</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container" tabindex="-1">
+    <section aria-labelledby="s-strengths">
+      <div class="section-controls"><button data-move="up">↑ 上移</button><button data-move="down">↓ 下移</button><button data-hide>隐藏</button></div>
+      <h2 id="s-strengths" class="section-title" data-editable="true">核心亮点</h2>
+      <div class="grid">
+        <div class="col-4">
+          <div class="card">
+            <h3 data-editable="true"><span class="icon">🚀</span>4+ 年产品全链路经验</h3>
+            <ul>
+              <li data-editable="true">内容创作工具、AI视频生成、用户增长、产品战略规划</li>
+              <li data-editable="true">从 0→1→100 打造面向全球的创作生态</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card">
+            <h3 data-editable="true"><span class="icon">🌏</span>TikTok 编辑线一号位</h3>
+            <ul>
+              <li data-editable="true">从 0→100 构建全球创作工具生态</li>
+              <li data-editable="true">DAU 千万级增长，投稿渗透率翻倍</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card">
+            <h3 data-editable="true"><span class="icon">🎯</span>初创公司产品负责人</h3>
+            <ul>
+              <li data-editable="true">主导市场趋势分析、产品定位、阶段策略规划</li>
+              <li data-editable="true">负责品牌建设及团队搭建</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="card">
+            <h3 data-editable="true"><span class="icon">🔭</span>前瞻性成果</h3>
+            <ul>
+              <li data-editable="true">提前布局 GenAI 创作工具方向，并完成用户与商业验证</li>
+              <li data-editable="true">捕捉行为趋势迁移关键点，成功提升创作渗透率与留存</li>
+              <li data-editable="true">推动内容生态从产量增长转向质量与收益驱动的战略转型</li>
+              <li data-editable="true">识别未被满足的用户需求，构建差异化体验与竞争力</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="card">
+            <h3 data-editable="true"><span class="icon">🧰</span>技能</h3>
+            <p data-editable="true">AIGC 工具（ChatGPT、Cursor 等）、Figma、Sketch、Final Cut Pro、AE、Python</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="card">
+            <h3 data-editable="true"><span class="icon">🗣️</span>语言</h3>
+            <p data-editable="true">英语 CET4｜法语 TCF B2</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="s-vision">
+      <div class="section-controls"><button data-move="up">↑ 上移</button><button data-move="down">↓ 下移</button><button data-hide>隐藏</button></div>
+      <h2 id="s-vision" class="section-title" data-editable="true">Future Intuition. Structured Innovation.</h2>
+      <div class="grid" style="align-items:start;">
+        <div class="col-6">
+          <div class="card mesh" data-editable="true">
+            <p>我相信未来不是预测出来的，而是提前感知并构建出来的。</p>
+            <p>我的洞察来源于对技术、人性与文化变迁的整体感知。</p>
+            <p>当趋势尚处弱信号阶段，我已经开始为它设计系统。</p>
+            <p>我的使命是让未来更快抵达现实，同时让 AI 不只是工具，而是人与人连接的桥梁。</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="card mesh">
+            <div class="flow" aria-label="流程图">
+              <div class="step">信号捕捉</div>
+              <div class="arrow">→</div>
+              <div class="step">产品设计</div>
+              <div class="arrow">→</div>
+              <div class="step">商业验证</div>
+              <div class="arrow">→</div>
+              <div class="step">扩展规模</div>
+            </div>
+            <div style="height: 12px;"></div>
+            <div class="flow" aria-label="时间线">
+              <div class="step">弱信号</div>
+              <div class="arrow">→</div>
+              <div class="step">产品迭代</div>
+              <div class="arrow">→</div>
+              <div class="step">规模化增长</div>
+            </div>
+            <div style="height: 12px;"></div>
+            <div class="flow" aria-label="What I spotted early">
+              <div class="step">短视频编辑</div>
+              <div class="arrow">→</div>
+              <div class="step">AI 生成</div>
+              <div class="arrow">→</div>
+              <div class="step">内容收益化</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="s-exp">
+      <div class="section-controls"><button data-move="up">↑ 上移</button><button data-move="down">↓ 下移</button><button data-hide>隐藏</button></div>
+      <h2 id="s-exp" class="section-title" data-editable="true">关键经历</h2>
+      <div class="grid">
+        <div class="col-12">
+          <div class="card mesh" data-editable="true">
+            <div class="timeline">
+              <div class="t-item">
+                <div class="t-header">
+                  <div>
+                    <div class="t-title" data-editable="true">初创公司 — 产品负责人 / 一号位</div>
+                    <div class="t-meta" data-editable="true">2025.09 – 2025.10</div>
+                  </div>
+                  <div class="metrics">
+                    <span class="metric">产品体系搭建</span>
+                    <span class="metric">阶段路径规划</span>
+                    <span class="metric">品牌体系搭建</span>
+                    <span class="metric">团队协同</span>
+                  </div>
+                </div>
+                <ul>
+                  <li data-editable="true">主导产品定位与阶段路径策略规划，聚焦用户情绪需求与人机关系构建</li>
+                  <li data-editable="true">构建公司官网与品牌视觉体系，强调陪伴价值与情绪认同</li>
+                  <li data-editable="true">推动团队建设与跨职能协作，AIGC辅助产品设计与文案迭代</li>
+                </ul>
+              </div>
+
+              <div class="t-item">
+                <div class="t-header">
+                  <div>
+                    <div class="t-title" data-editable="true">TikTok / 字节跳动 — 资深产品经理（编辑线一号位）</div>
+                    <div class="t-meta" data-editable="true">2022.04 – 2025.07</div>
+                  </div>
+                  <div class="metrics">
+                    <span class="metric">DAU 15M → 29.3M</span>
+                    <span class="metric">投稿渗透率 ×2</span>
+                    <span class="metric">功能渗透 +20%</span>
+                  </div>
+                </div>
+                <ul>
+                  <li data-editable="true">Editor Pro 0→100：DAU 15M → 29.3M (+95%)，投稿渗透率 6M → 12M (+100%)</li>
+                  <li data-editable="true">Editor Tab 0→1：构建「创作 × 社交互动」生态入口</li>
+                  <li data-editable="true">AI 工具矩阵布局：音色克隆、T2V、智能抠图、字幕动画等</li>
+                  <li data-editable="true">用户增长与运营优化：功能使用渗透 +20%，安卓端核心指标由负转正</li>
+                  <li data-editable="true">核心价值：让用户敢表达、愿表达，并在表达中获得反馈和关系连接，为未来 AI 陪伴及人性化产品奠定基础</li>
+                </ul>
+              </div>
+
+              <div class="t-item">
+                <div class="t-header">
+                  <div>
+                    <div class="t-title" data-editable="true">抖音本地生活 / 幸福里 App — 产品体验设计</div>
+                    <div class="t-meta" data-editable="true">2021.08 – 2022.03</div>
+                  </div>
+                  <div class="metrics">
+                    <span class="metric">DAU +15w</span>
+                    <span class="metric">转化率 49% → 68%</span>
+                    <span class="metric">NPS 3.99 → 4.39</span>
+                  </div>
+                </div>
+                <ul>
+                  <li data-editable="true">搭建楼宇点评内容生态，DAU +15w，内容渗透率 16% → 19%</li>
+                  <li data-editable="true">优化用户创作链路，发布转化率 49% → 68%，NPS 3.99 → 4.39</li>
+                </ul>
+              </div>
+
+              <div class="t-item">
+                <div class="t-header">
+                  <div>
+                    <div class="t-title" data-editable="true">字节跳动 AI Lab / 嘀嘀无限科技 AI Lab — 产品实习</div>
+                    <div class="t-meta" data-editable="true">2020 – 2021</div>
+                  </div>
+                  <div class="metrics">
+                    <span class="metric">识别准确率 83.7%</span>
+                    <span class="metric">投稿意愿 5% → 36%</span>
+                    <span class="metric">人力节省 60%</span>
+                  </div>
+                </div>
+                <ul>
+                  <li data-editable="true">搭建直播高光识别模型（准确率 83.7%），提升主播投稿意愿 5% → 36%</li>
+                  <li data-editable="true">落地智慧交通视频感知平台，与政府合作节省 60% 人力，用户满意度 4.1/5</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="s-edu">
+      <div class="section-controls"><button data-move="up">↑ 上移</button><button data-move="down">↓ 下移</button><button data-hide>隐藏</button></div>
+      <h2 id="s-edu" class="section-title" data-editable="true">教育</h2>
+      <div class="grid">
+        <div class="col-6">
+          <div class="card"><h3 data-editable="true">亚眠高等艺术设计学院 — 产品设计 硕士</h3></div>
+        </div>
+        <div class="col-6">
+          <div class="card"><h3 data-editable="true">中央财经大学 — 数字媒体 本科，北京 985/211</h3></div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="s-honors">
+      <div class="section-controls"><button data-move="up">↑ 上移</button><button data-move="down">↓ 下移</button><button data-hide>隐藏</button></div>
+      <h2 id="s-honors" class="section-title" data-editable="true">荣誉与专利</h2>
+      <div class="card">
+        <div class="h-scroll" aria-label="荣誉横向滚动">
+          <span class="chip" data-editable="true">🏆 Editor Tab 国际产品专利（2024）</span>
+          <span class="chip" data-editable="true">🏅 字节跳动新领域突破奖（2023）</span>
+          <span class="chip" data-editable="true">🏅 字节跳动优秀新人奖（2022）</span>
+          <span class="chip" data-editable="true">📰 文章《TikTok编辑器的过去与未来》被科技媒体转载，累计数万观看（2025）</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="s-cta">
+      <h2 id="s-cta" class="section-title" style="position:absolute; left:-9999px; height:1px; width:1px; overflow:hidden;">联系我</h2>
+      <div class="glass cta" role="contentinfo" style="border:1px solid rgba(0,229,255,0.5);">
+        <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-weight:600;">
+          <span>📍 北京</span>
+          <span style="opacity:0.5;">|</span>
+          <span>📧 邮箱 lost7wbx</span>
+          <span style="opacity:0.5;">|</span>
+          <span>📱 电话 17601056076</span>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="#main" aria-label="返回顶部">返回顶部</a>
+          <a class="btn" href="mailto:lost7wbx" aria-label="发送邮件">Email</a>
+          <a class="btn" href="https://www.linkedin.com/in/isabelle-weng" target="_blank" rel="noopener" aria-label="访问LinkedIn">LinkedIn</a>
+          <a class="btn primary" href="#" aria-label="与我交流未来产品" onclick="alert('感谢关注，稍后将提供表单/日程链接'); return false;">与我交流未来产品</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="y"></span> Isabelle Weng. Future Intuition × Structured Innovation.
+  </footer>
+
+  <script>
+    // 年份
+    document.getElementById('y').textContent = new Date().getFullYear();
+    // 减少首屏动画偏好：若用户偏好减少动效，则降低信号点动画
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq.matches) {
+      document.querySelectorAll('.signal').forEach(function(el){ el.style.animation = 'none'; });
+    }
+    // 轻量粒子背景
+    (function(){
+      var canvas = document.createElement('canvas');
+      canvas.id = 'particles';
+      canvas.style.cssText = 'position:fixed;inset:0;z-index:0;pointer-events:none;';
+      document.body.appendChild(canvas);
+      var ctx = canvas.getContext('2d');
+      var dpr = window.devicePixelRatio || 1;
+      var particles = [];
+      function resize(){ canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr; }
+      resize();
+      var count = Math.min(90, Math.floor(innerWidth/18));
+      for(var i=0;i<count;i++){
+        particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.8+0.6, vx: (Math.random()-0.5)*0.08*dpr, vy: (Math.random()-0.5)*0.08*dpr, a: Math.random()*0.5+0.25 });
+      }
+      var mx = 0, my = 0;
+      window.addEventListener('mousemove', function(e){ mx = e.clientX * dpr; my = e.clientY * dpr; });
+      function step(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for(var i=0;i<particles.length;i++){
+          var p = particles[i];
+          p.x += p.vx; p.y += p.vy;
+          if(p.x<0||p.x>canvas.width) p.vx*=-1;
+          if(p.y<0||p.y>canvas.height) p.vy*=-1;
+          // 轻微连线
+          for(var j=i+1;j<particles.length;j++){
+            var q = particles[j];
+            var dx = p.x - q.x, dy = p.y - q.y; var dist = Math.sqrt(dx*dx+dy*dy);
+            if(dist < 90*dpr){
+              var alpha = (1 - dist/(90*dpr)) * 0.25;
+              ctx.strokeStyle = 'rgba(124,255,203,'+alpha.toFixed(3)+')';
+              ctx.lineWidth = 0.6*dpr; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+            }
+          }
+          // 粒子
+          var glx = (mx - p.x) * 0.00005; var gly = (my - p.y) * 0.00005; // 轻微跟随
+          ctx.fillStyle = 'rgba(0,229,255,'+p.a.toFixed(2)+')';
+          ctx.beginPath(); ctx.arc(p.x+glx, p.y+gly, p.r, 0, Math.PI*2); ctx.fill();
+        }
+        if(!mq.matches) requestAnimationFrame(step);
+      }
+      if(!mq.matches) step();
+      window.addEventListener('resize', function(){ resize(); });
+    })();
+
+    // 简易编辑模式：启用可编辑文本、模块移动/隐藏、下载HTML
+    (function(){
+      var root = document.documentElement;
+      var toolbar = document.createElement('div');
+      toolbar.className = 'editor-toolbar';
+      toolbar.innerHTML = '<button class="editor-toggle">✎ 编辑模式</button><button class="editor-action" style="display:none;" data-download>下载HTML</button>';
+      document.body.appendChild(toolbar);
+      var toggleBtn = toolbar.querySelector('.editor-toggle');
+      var downloadBtn = toolbar.querySelector('[data-download]');
+      var editing = false;
+      function setEditable(flag){
+        editing = flag;
+        document.body.classList.toggle('editable-active', editing);
+        downloadBtn.style.display = editing ? 'block' : 'none';
+        var nodes = document.querySelectorAll('[data-editable="true"], .section-title, .card p, .card li, .card h3');
+        nodes.forEach(function(n){ n.setAttribute('contenteditable', editing ? 'true' : 'false'); });
+      }
+      toggleBtn.addEventListener('click', function(){ setEditable(!editing); });
+      downloadBtn.addEventListener('click', function(){
+        var blob = new Blob([document.documentElement.outerHTML], {type: 'text/html;charset=utf-8'});
+        var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'isabelle_personal_edited.html'; a.click();
+      });
+      // section 控件
+      document.querySelectorAll('main section').forEach(function(sec){
+        sec.style.position = 'relative';
+        var controls = sec.querySelector('.section-controls');
+        if(!controls) return;
+        controls.addEventListener('click', function(e){
+          var btn = e.target.closest('button'); if(!btn) return;
+          if(btn.hasAttribute('data-hide')){ sec.style.display = 'none'; }
+          if(btn.dataset.move === 'up' && sec.previousElementSibling){ sec.parentNode.insertBefore(sec, sec.previousElementSibling); }
+          if(btn.dataset.move === 'down' && sec.nextElementSibling){ sec.parentNode.insertBefore(sec.nextElementSibling, sec); }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
+
+
